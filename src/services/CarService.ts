@@ -1,6 +1,7 @@
 import { IService } from '../interfaces/IService';
 import { IModel } from '../interfaces/IModel';
 import { ICar, zCarSchema } from '../interfaces/ICar';
+import { ErrorTypes } from '../errors/catalog';
 
 class CarService implements IService<ICar> {
   constructor(private _cars: IModel<ICar>) { }
@@ -10,6 +11,12 @@ class CarService implements IService<ICar> {
     if (!parsed.success) throw parsed.error;
     const created = await this._cars.create(parsed.data);
     return created;
+  }
+
+  public async read(): Promise<ICar[]> {
+    const allCars = await this._cars.read();
+    if (!allCars) throw Error(ErrorTypes.EntityNotFound);
+    return allCars;
   }
 }
 

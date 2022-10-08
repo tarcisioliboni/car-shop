@@ -13,6 +13,11 @@ abstract class MongoModel<T> implements IModel<T> {
     const created = await this._model.create({ ...obj });
     return created;
   }
+
+  public async read():Promise<T[]> {
+    const getAll = await this._model.find();
+    return getAll;
+  }
 }
 
 export default MongoModel;
