@@ -1,6 +1,7 @@
 import { ICar } from './ICar';
 
 export interface IService<T> {
-  create(_obj: ICar): Promise<T>,
+  create(obj: ICar): Promise<T>,
   read(): Promise<T[]>,
+  readOne(id: string): Promise<T>,
 }
